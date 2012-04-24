@@ -5,6 +5,14 @@ module Rovi
       @hash = parsed_response
     end
     
+    def hash
+      @hash
+    end
+    
+    def empty?
+      @hash.nil? || searchResponse.totalResultCounts == 0
+    end
+    
     def method_missing(m)
       key = m.to_s      
       if @hash != nil and @hash.has_key?(key)
