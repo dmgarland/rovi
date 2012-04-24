@@ -1,0 +1,1 @@
+Rovi::Api.new(access_token).get("album", "info", params)
