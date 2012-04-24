@@ -31,15 +31,25 @@ describe Rovi::Api do
   
     describe 'GET the response from the API' do
       before do
+        mock_response = mock()
+        mock_response.expects(:parsed_response).returns({ "value" => { "nested" =>  "hi" }})        
+        
         Rovi::Api.expects(:get).with('http://api.rovicorp.com/data/v1/album/info', { 
         :query => { :albumid => 'MW0000111184', :apikey => '12345', 
-        :sig => '0ff3ae460b0f7d821482204ca70c8fe8'}})
+        :sig => '0ff3ae460b0f7d821482204ca70c8fe8'}}).returns(mock_response)
 
         Timecop.freeze(Time.local(2012, 1, 1)) do
           @response = @api.get("album", "info", { :albumid => "MW0000111184" })
         end
       end
       
+      it "should return a JsonResponse wrapper" do
+        @response.is_a?(Rovi::JsonResponse).should == true
+      end
+      
+      it "should access hash keys using methods" do
+        @response.value.nested.should == "hi"
+      end
     end
   end
 end

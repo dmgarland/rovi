@@ -3,17 +3,18 @@ module Rovi
   class Api
     include HTTParty
     
-    @@host = "http://api.rovicorp.com"
-    @@version = "v1"
+    @@host = "http://api.rovicorp.com"    
     
     def initialize(api_key, api_secret)
       @api_key, @api_secret = api_key, api_secret
+      @version = "v1"
+      @service_name = "data"
     end
     
     def get(function, function_request, params)
       @api_function, @api_function_request = function, function_request
-      params.merge!({ :apikey => @api_key, :sig => generate_sig })
-      self.class.get(endpoint, :query => params) 
+      params.merge!({ :apikey => @api_key, :sig => generate_sig })      
+      JsonResponse.new(self.class.get(endpoint, :query => params).parsed_response)
     end
     
     private
@@ -23,7 +24,7 @@ module Rovi
     end
     
     def endpoint
-      [@@host, "data", @@version, @api_function, @api_function_request].join("/")
+      [@@host, @service_name, @version, @api_function, @api_function_request].join("/")
     end
     
   end
