@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = "rovi"
-  s.version = "0.0.0"
+  s.version = "0.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Dan Garland"]
@@ -27,8 +27,10 @@ Gem::Specification.new do |s|
     "VERSION",
     "lib/rovi.rb",
     "lib/rovi/api.rb",
-    "lib/rovi/services/#Untitled-1#",
-    "lib/rovi/services/data.rb",
+    "lib/rovi/json_response.rb",
+    "lib/rovi/services/recommendations.rb",
+    "lib/rovi/services/search.rb",
+    "rovi.gemspec",
     "spec/lib/api_spec.rb",
     "spec/spec_helper.rb"
   ]
