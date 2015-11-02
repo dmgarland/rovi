@@ -2,12 +2,13 @@ module Rovi
   
   class Api
     include HTTParty
+    # debug_output $stdout
     
     @@host = "http://api.rovicorp.com"    
     
     def initialize(api_key, api_secret)
       @api_key, @api_secret = api_key, api_secret
-      @version = "v1"
+      @version = "v1.1"
       @service_name = "data"
     end
     
